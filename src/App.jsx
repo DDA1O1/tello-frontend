@@ -1,37 +1,58 @@
 // src/App.jsx
-import { useState, useEffect } from 'react'; // Import useState and useEffect
+import { useState, useEffect } from 'react';
 import JSMpegVideoPlayer from '@/components/JSMpegVideoPlayer';
 import DroneControl from '@/components/control/DroneControl';
 import DroneStateDisplay from '@/components/DroneStateDisplay';
-import DownloadPromptModal from '@/components/DownloadPromptModal'; // Import the modal
+import InformationPopup from '@/components/InformationPopup'; // Import the popup
+
+// Base URL for all download links
+const BASE_URL = 'https://github.com/DDA1O1/tello-backend/releases/download/v1.0.3/';
+
+// --- IMPORTANT ---
+// Replace these placeholder URLs with your actual GitHub Release asset URLs
+const DOWNLOAD_LINKS = {
+  windows_x64: {
+    url: `${BASE_URL}tello-backend-1.0.3.Setup-x64.exe`, // Using BASE_URL
+    label: 'Windows Installer (x64)',
+    size: '112 MB',
+    filename: 'tello-backend-1.0.3.Setup-x64.exe'
+  },
+  windows_arm64: {
+    url: `${BASE_URL}tello-backend-1.0.3.Setup-arm64.exe`, // Using BASE_URL
+    label: 'Windows Installer (ARM64)',
+    size: '112 MB',
+    filename: 'tello-backend-1.0.3.Setup-arm64.exe'
+  },
+  linux_amd64: {
+    url: `${BASE_URL}tello-backend_1.0.3_amd64-x64.deb`, // Using BASE_URL
+    label: 'Linux Debian/Ubuntu Package (amd64)',
+    size: '81.5 MB',
+    filename: 'tello-backend_1.0.3_amd64-x64.deb'
+  },
+  linux_arm64: {
+    url: `${BASE_URL}tello-backend_1.0.3_arm64-arm64.deb`, // Using BASE_URL
+    label: 'Linux Debian/Ubuntu Package (arm64)',
+    size: '81.5 MB',
+    filename: 'tello-backend_1.0.3_arm64-arm64.deb'
+  },
+};
+// -----------------
 
 function App() {
-  // State to control the modal visibility
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
 
-  // Optional: Show modal automatically on first load
-  // You could use localStorage to show it only once per user session/browser
+  // Show the popup when the component mounts
   useEffect(() => {
-    // Example: Show the modal shortly after the app loads
-    const timer = setTimeout(() => {
-       // Check local storage if you want to show only once
-       // const shownBefore = localStorage.getItem('downloadPromptShown');
-       // if (!shownBefore) {
-           setIsModalOpen(true);
-       //    localStorage.setItem('downloadPromptShown', 'true');
-       // }
-    }, 1500); // Show after 1.5 seconds
+    setIsInfoPopupOpen(true);
+  }, []); // Runs once on mount
 
-    return () => clearTimeout(timer); // Cleanup timer on unmount
-  }, []); // Empty dependency array means run once on mount
-
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const handleCloseInfoPopup = () => {
+    setIsInfoPopupOpen(false);
   };
 
   return (
-    <div className="relative h-screen">
-      {/* JSMpegVideoPlayer - renders the video stream */}
+    <div className="relative h-screen bg-gray-900"> {/* Added a fallback bg */}
+      {/* JSMpegVideoPlayer */}
       <JSMpegVideoPlayer />
 
       {/* Drone controls overlay */}
@@ -40,8 +61,12 @@ function App() {
       {/* Drone state display */}
       <DroneStateDisplay />
 
-      {/* Download Prompt Modal */}
-      <DownloadPromptModal isOpen={isModalOpen} onClose={closeModal} />
+      {/* Information Popup */}
+      <InformationPopup
+        isOpen={isInfoPopupOpen}
+        onClose={handleCloseInfoPopup}
+        downloadLinks={DOWNLOAD_LINKS} // Pass the structured links
+      />
     </div>
   );
 }
