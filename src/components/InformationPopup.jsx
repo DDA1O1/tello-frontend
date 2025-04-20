@@ -5,7 +5,6 @@ import React from 'react';
 const DownloadLinkItem = ({ label, size, url, filename }) => (
   <a
     href={url}
-    target="_blank"
     rel="noopener noreferrer"
     download={filename} // Suggests the filename when downloading
     className="flex justify-between items-center px-4 py-3 bg-blue-50 dark:bg-gray-700 hover:bg-blue-100 dark:hover:bg-gray-600 rounded-md border border-blue-200 dark:border-gray-600 transition-colors duration-150 group"
