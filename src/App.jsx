@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react';
 import JSMpegVideoPlayer from '@/components/JSMpegVideoPlayer';
 import DroneControl from '@/components/control/DroneControl';
 import DroneStateDisplay from '@/components/DroneStateDisplay';
-import InformationPopup from '@/components/InformationPopup'; // Import the popup
+import InformationPopup from '@/components/InformationPopup'; 
+import OrientationGuide from '@/components/OrientationGuide';
 
 // Base URL for all download links
 const BASE_URL = 'https://github.com/DDA1O1/tello-backend/releases/download/v1.0.3/';
 
-// --- IMPORTANT ---
-// Replace these placeholder URLs with your actual GitHub Release asset URLs
+
 const DOWNLOAD_LINKS = {
   windows_x64: {
     url: `${BASE_URL}tello-backend-1.0.3.Setup-x64.exe`, // Using BASE_URL
@@ -65,8 +65,12 @@ function App() {
       <InformationPopup
         isOpen={isInfoPopupOpen}
         onClose={handleCloseInfoPopup}
-        downloadLinks={DOWNLOAD_LINKS} // Pass the structured links
+        downloadLinks={DOWNLOAD_LINKS} 
       />
+
+      {/* Orientation Guide */}
+      <OrientationGuide />
+      
     </div>
   );
 }
