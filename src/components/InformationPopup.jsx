@@ -66,7 +66,7 @@ const InformationPopup = ({ isOpen, onClose, downloadLinks }) => {
         {/* Main Explanation */}
         <div className="text-gray-700 dark:text-gray-300 text-sm sm:text-base mb-6 space-y-3">
             <p>
-              Modern web browsers operate within a secure "sandbox," limiting direct access to system resources. For the best Tello drone control experience, this web interface relies on a companion **backend application** running on your computer.
+              Modern web browsers operate within a secure "sandbox," limiting direct access to system resources. For the best Tello drone control experience, this web interface relies on a companion <strong>backend application</strong> running on your computer.
             </p>
             <p>
               The backend handles tasks browsers cannot, ensuring smooth operation:
@@ -77,7 +77,7 @@ const InformationPopup = ({ isOpen, onClose, downloadLinks }) => {
               <li>Direct file system access for saving photos and videos.</li>
             </ul>
              <p>
-              While this web interface provides the controls, you **need the backend application running** for it to function.
+              While this web interface provides the controls, you <strong>need the backend application running</strong> for it to function.
              </p>
         </div>
 
@@ -105,7 +105,7 @@ const InformationPopup = ({ isOpen, onClose, downloadLinks }) => {
             Web Interface Browser Note
           </h3>
           <p className="text-sm sm:text-base text-yellow-700 dark:text-yellow-300">
-             For the smoothest experience with this web interface, we recommend using **Google Chrome**. Some other browsers may aggressively limit performance for complex tasks, potentially causing visual lag or stuttering in the video feed.
+             For the smoothest experience with this web interface, we recommend using <strong>Google Chrome</strong>. Some other browsers may aggressively limit performance for complex tasks, potentially causing visual lag or stuttering in the video feed.
           </p>
         </div>
 
